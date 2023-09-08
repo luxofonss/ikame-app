@@ -1,5 +1,6 @@
 import AchievementRound from "@/components/AchievementRound";
 import BestProductItem from "@/components/BestProductItem";
+import BlurRound from "@/components/BlurRournd";
 import Button from "@/components/Button";
 import IntroduceItem from "@/components/IntroduceItem";
 
@@ -7,18 +8,22 @@ export default function Home() {
   return (
     <div>
       {/* QOUTE */}
-      <section className="w-full bg-no-repeat bg-cover bg-center h-[900px] bg-home-bg">
+      <section className="relative w-full bg-no-repeat bg-cover bg-center h-[900px] bg-home-bg">
+        <BlurRound className=" w-[361px] h-[361px] absolute top-[161px] left-[433px]" />
+        <BlurRound className=" w-[353px] h-[353px] absolute top-[595px] left-[-63px]" />
+        <BlurRound className=" w-[206px] h-[206px] absolute top-[582px] right-[-60px]" />
         <div className="container mx-auto">
-          <div className="pt-[281px]">
-            <h1 className="font-bold text-[60px] text-main-0">
-              Think It, Dream It,
-            </h1>
-            <h1 className="font-bold text-[60px]">We&apos;ll Build It</h1>
-            <p className="text-2xl leading-10">
-              iKame Applications - a Mobile Apps <br />
-              Publisher. Powering your app with a Robust <br />
-              Ecosystem and Passionate Team.
-            </p>
+          <div className="grid grid-cols-2">
+            <div className="pt-[281px]">
+              <h1 className="font-bold text-[60px] text-main-0">
+                Think It, Dream It,
+              </h1>
+              <h1 className="font-bold text-[60px]">We&apos;ll Build It</h1>
+              <p className="text-2xl leading-10">
+                iKame Applications - a Mobile Apps Publisher. Powering your app
+                with a Robust Ecosystem and Passionate Team.
+              </p>
+            </div>
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import { FC } from "react";
 import Button from "./Button";
+import HeaderNav from "./HeaderNav";
 import LangSwitch from "./LangSwitch";
 
 type Props = {};
@@ -19,23 +19,7 @@ const Header: FC<Props> = () => {
           />
         </div>
         <div className="flex items-center gap-[61px]">
-          <nav className="flex gap-11">
-            <Link className="text-main-2 font-bold" href="/">
-              Home
-            </Link>
-            <Link className="text-white font-bold" href="/">
-              Products
-            </Link>
-            <Link className="text-white font-bold" href="/">
-              Publishing
-            </Link>
-            <Link className="text-white font-bold" href="/">
-              Career
-            </Link>
-            <Link className="text-white font-bold" href="/">
-              About us
-            </Link>
-          </nav>
+          <HeaderNav />
           <div className="flex gap-8 items-center">
             <Button>Join us as Partners</Button>
             <LangSwitch />
