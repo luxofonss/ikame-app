@@ -12,8 +12,8 @@ const Button: FC<IButtonProps> = ({
   return (
     <button
       className={cn(
-        className,
-        "py-[10px] px-5 bg-button-gradient rounded-[14px]"
+        "py-[10px] px-5 bg-button-gradient rounded-[14px]",
+        className
       )}
       {...props}
     >

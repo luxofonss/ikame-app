@@ -1,7 +1,6 @@
-import { FC } from "react";
-import FooterCarousel from "./FooterCarousel";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
+import { FC } from "react";
 
 type Props = {};
 interface INavigateList {
@@ -14,7 +13,7 @@ interface INavigateList {
 const Footer: FC<Props> = ({}) => {
   return (
     <footer>
-      <FooterCarousel />
+      
       <div className="w-full h-[300px] bg-footer-bg bg-no-repeat bg-cover">
         <div className="container mx-auto">
           <div className="italic text-4xl font-semibold text-center pt-[84px]">
@@ -84,7 +83,7 @@ const Footer: FC<Props> = ({}) => {
             // style="border:none;overflow:hidden"
             className="border-non overflow-hidden"
             scrolling="no"
-            frameborder="0"
+            frameBorder="0"
             allowfullscreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           ></iframe>

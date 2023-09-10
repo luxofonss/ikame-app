@@ -56,7 +56,7 @@ const OutStandingProductSection: FC<Props> = ({}) => {
               height={54}
             />
           </div>
-          <div className="w-full ml-[120px] bg-no-repeat bg-cover bg-center h-[360px] bg-chromecast rounded-2xl"></div>
+          <div className="w-full bg-no-repeat bg-cover bg-center h-[360px] bg-chromecast rounded-2xl"></div>
         </div>
       </div>
     </section>

@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 type Props = {};
 
-const CarouselItem: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
+export const CarouselItem: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
   return (
     <div
       className={

@@ -70,7 +70,7 @@ export default function Products() {
   return (
     <div className="bg-[#131313]">
       {/* QOUTE */}
-      <section className="relative w-full bg-no-repeat bg-cover bg-center h-[900px] bg-banner-product">
+      <section className="relative w-full bg-no-repeat bg-cover bg-center h-[900px] bg-banner-product overflow-hidden">
         <BlurRound className=" w-[361px] h-[361px] absolute top-[161px] left-[433px]" />
         <BlurRound className=" w-[353px] h-[353px] absolute top-[595px] left-[-63px]" />
         <BlurRound className=" w-[206px] h-[206px] absolute top-[582px] right-[-60px]" />

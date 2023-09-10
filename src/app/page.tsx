@@ -1,14 +1,14 @@
 import AchievementRound from "@/components/AchievementRound";
 import BestProductItem from "@/components/BestProductItem";
 import BlurRound from "@/components/BlurRournd";
-import Button from "@/components/Button";
+import FooterCarousel from "@/components/FooterCarousel";
 import IntroduceItem from "@/components/IntroduceItem";
 
 export default function Home() {
   return (
     <div>
       {/* QOUTE */}
-      <section className="relative w-full bg-no-repeat bg-cover bg-center h-[900px] bg-home-bg">
+      <section className="relative w-full bg-no-repeat bg-cover bg-center h-[900px] bg-home-bg overflow-hidden">
         <BlurRound className=" w-[361px] h-[361px] absolute top-[161px] left-[433px]" />
         <BlurRound className=" w-[353px] h-[353px] absolute top-[595px] left-[-63px]" />
         <BlurRound className=" w-[206px] h-[206px] absolute top-[582px] right-[-60px]" />
@@ -150,6 +150,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* CAROUSEL  */}
+      <FooterCarousel />
     </div>
   );
 }
