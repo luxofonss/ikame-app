@@ -63,6 +63,8 @@ const config: Config = {
         "2xl": "1320px",
       },
       colors: {
+        required: "#EC1F1F",
+        border: "rgba(228, 228, 228, 0.60)",
         main: {
           "0": "#FF8616",
           "2": "#F56522",

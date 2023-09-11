@@ -7,10 +7,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { cn } from "@/lib/utils";
+import { it } from "node:test";
+import { BASE_IMAGE_URL } from "@/configs";
 
-type Props = {};
+type Props = { data: any };
 
-export const CarouselItem: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
+export const CarouselItem = ({ image }: { image: string }) => {
   return (
     <div
       className={
@@ -18,16 +20,14 @@ export const CarouselItem: FC<HTMLProps<HTMLDivElement>> = ({ className }) => {
       }
     >
       <div
-        className={cn(
-          className,
-          `bg-no-repeat bg-cover bg-center w-[211px] h-[64px]`
-        )}
+        className={`bg-no-repeat bg-contain bg-center w-[211px] h-[64px]`}
+        style={{ backgroundImage: `url('${image}')` }}
       ></div>
     </div>
   );
 };
 
-const FooterCarousel: FC<Props> = ({}) => {
+const FooterCarousel: FC<Props> = ({ data }) => {
   const settings = {
     dots: false,
     arrow: false,
@@ -42,12 +42,14 @@ const FooterCarousel: FC<Props> = ({}) => {
   return (
     <div className="h-[260px] px-8 w-full py-[90px]">
       <Slider {...settings}>
-        <CarouselItem className="bg-google-play" />
-        <CarouselItem className="bg-google-cloud" />
-        <CarouselItem className="bg-google-ads" />
-        <CarouselItem className="bg-apple" />
-        <CarouselItem className="bg-mintegral" />
-        <CarouselItem className="bg-ironsource" />
+        {data?.data?.map((item: any) => {
+          return (
+            <CarouselItem
+              key={item.attributes.Title}
+              image={BASE_IMAGE_URL + item.attributes.Media.data.attributes.url}
+            />
+          );
+        })}
       </Slider>
     </div>
   );

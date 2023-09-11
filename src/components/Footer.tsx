@@ -1,3 +1,4 @@
+import { BASE_API_URL } from "@/configs";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
@@ -10,10 +11,15 @@ interface INavigateList {
     path: string;
   }[];
 }
-const Footer: FC<Props> = ({}) => {
+
+const Footer: FC<Props> = async ({}) => {
+  const response = await fetch(BASE_API_URL + "/footer-pages?populate=*", {
+    cache: "default",
+  });
+  const footerContent = await response.json();
+
   return (
     <footer>
-      
       <div className="w-full h-[300px] bg-footer-bg bg-no-repeat bg-cover">
         <div className="container mx-auto">
           <div className="italic text-4xl font-semibold text-center pt-[84px]">
@@ -41,15 +47,17 @@ const Footer: FC<Props> = ({}) => {
             />
             <div className="flex items-center gap-[10px] mt-4">
               <Image src="/phone.svg" alt="phone" width={18} height={18} />
-              <span className="">0985369578</span>
+              <span className="">{footerContent.data[0].attributes.Phone}</span>
             </div>
             <div className="flex items-center gap-[10px]">
               <Image src="/mail.svg" alt="phone" width={18} height={18} />
-              <span className="">info@begamob.com</span>
+              <span className="">{footerContent.data[0].attributes.Email}</span>
             </div>
             <div className="flex items-center gap-[10px]">
               <Image src="/map.svg" alt="phone" width={18} height={18} />
-              <span className="">34 Hoàng Cầu, Đống Đa, Hà Nội, Việt Nam.</span>
+              <span className="">
+                {footerContent.data[0].attributes.Address}
+              </span>
             </div>
           </div>
           <NavigateList
@@ -84,25 +92,29 @@ const Footer: FC<Props> = ({}) => {
             className="border-non overflow-hidden"
             scrolling="no"
             frameBorder="0"
-            allowfullscreen="true"
+            allowFullScreen="true"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           ></iframe>
         </div>
         <div className="flex justify-between items-center mt-7">
           <div className="flex gap-3">
-            <Image
-              src="/gg-play-download.svg"
-              alt="gg-play"
-              width={135}
-              height={40}
-            />
-            <Image
-              className="text-white"
-              src="/apple.svg"
-              alt="apple"
-              width={135}
-              height={40}
-            />
+            <Link href={footerContent.data[0].attributes.LinkGooglePlay || "/"}>
+              <Image
+                src="/gg-play-download.svg"
+                alt="gg-play"
+                width={135}
+                height={40}
+              />
+            </Link>
+            <Link href={footerContent.data[0].attributes.LinkAppleStore || "/"}>
+              <Image
+                className="text-white"
+                src="/apple.svg"
+                alt="apple"
+                width={135}
+                height={40}
+              />
+            </Link>
           </div>
           <div className="flex gap-7 items-center">
             <Link className="text-[#B9B9B9]" href={"/"}>
