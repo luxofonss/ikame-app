@@ -12,6 +12,8 @@ type ILeaderQuote = {};
 const LeaderQuote: FC<ILeaderQuote> = ({}) => {
   const [nav1, setNav1] = useState<any>();
   const [nav2, setNav2] = useState<any>();
+  const [selected, setSelected] = useState<number>(0);
+
   const settings = {
     dots: false,
     //     autoplay: true,
@@ -22,6 +24,9 @@ const LeaderQuote: FC<ILeaderQuote> = ({}) => {
     initialSlide: 0,
     speed: 500,
     arrows: false,
+    afterChange: (index: any) => {
+      setSelected(index);
+    },
   };
   const settingsPerson = {
     dots: false,
@@ -48,19 +53,20 @@ const LeaderQuote: FC<ILeaderQuote> = ({}) => {
         <QuoteItem />
       </Slider>
 
-      <div className="w-full mt-40 py-8 bg-black-0.5">
+      <div className="w-full  h-[324px] mt-40 py-8 bg-black-0.5">
         <Slider
           asNavFor={nav1}
           ref={(slider2) => setNav2(slider2)}
           {...settingsPerson}
         >
-          <PersonItem />
-          <PersonItem />
-          <PersonItem />
-          <PersonItem />
-          <PersonItem />
-          <PersonItem />
-          <PersonItem />
+          {[0, 1, 2, 3, 4, 5].map((item, index) => {
+            return (
+              <PersonItem
+                isSelected={index === selected ? true : false}
+                key={item}
+              />
+            );
+          })}
         </Slider>
       </div>
     </div>
@@ -87,17 +93,21 @@ const QuoteItem = () => {
   );
 };
 
-const PersonItem = () => {
+const PersonItem = ({ isSelected }: { isSelected: boolean }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col h-[260px] justify-between items-center">
       <Image
         src="/a-trong.png"
         alt="person"
-        width={120}
-        height={120}
-        className="border-[2px] border-white rounded-full"
+        width={isSelected ? 160 : 120}
+        height={isSelected ? 160 : 120}
+        className={
+          isSelected
+            ? "border-[2px] border-main-0 rounded-full transition"
+            : "border-[2px] border-white rounded-full transition"
+        }
       />
-      <h4 className="text-[32px] font-semibold text-center mt-7">
+      <h4 className="text-[32px] font-semibold text-center">
         Trong, Tran Duc (Mr.)
       </h4>
       <p className="text-lg italic">General Manager</p>

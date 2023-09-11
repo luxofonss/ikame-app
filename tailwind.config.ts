@@ -66,6 +66,7 @@ const config: Config = {
         main: {
           "0": "#FF8616",
           "2": "#F56522",
+          "3": "rgba(255, 134, 22, 0.10)",
         },
         "blur-round": "rgba(255, 134, 22, 0.10)",
         "black-1": "#1F1F1F",
