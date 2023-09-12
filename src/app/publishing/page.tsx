@@ -11,51 +11,13 @@ import fetchContent from "@/lib/fetch";
 import { cn } from "@/lib/utils";
 import { BASE_IMAGE_URL } from "@/configs";
 import HightLight from "@/components/HightLight";
+import TopGiantFooter from "@/components/TopGiantFooter";
 
 interface IWorkItem {
   svg: string;
   title: string;
   desc: string;
 }
-
-const workItems = [
-  {
-    color: "bg-[#F9AD96]",
-    svg: "/message.svg",
-    title: "Introduction",
-    desc: "Communicate to know each other and find a way to work.",
-  },
-  {
-    color: "bg-[#C1CF73]",
-    svg: "/code.svg",
-    title: "Evaluation",
-    desc: "Share your app data for us to analyze and feedback on how to grow your app.",
-  },
-  {
-    color: "bg-[#ABBE46]",
-    svg: "/test.svg",
-    title: "Introduction",
-    desc: "Run UA campaigns with a specific budget, then identify the scalability and improvement in-app.",
-  },
-  {
-    color: "bg-[#D6B872]",
-    svg: "/like.svg",
-    title: "Official Partner",
-    desc: "We discuss the agreement, then both sign and officially become partners.",
-  },
-  {
-    color: "bg-[#DB9266]",
-    svg: "/up.svg",
-    title: "Optimize & Scale",
-    desc: "Analyze metrics, create an interaction roadmap, promote & monetize the app.",
-  },
-  {
-    color: "bg-[#E2B74E]",
-    svg: "/money.svg",
-    title: "Get profits",
-    desc: "We celebrate success with millions of profits together!",
-  },
-];
 
 export default async function Publishing() {
   const publishingPage = await fetchContent({
@@ -183,6 +145,9 @@ export default async function Publishing() {
 
       {/* OUTSTANDING PRODUCT  */}
       <OutStandingProductSection />
+
+      {/* TOP GIANT */}
+      <TopGiantFooter />
     </div>
   );
 }

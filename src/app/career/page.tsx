@@ -229,18 +229,21 @@ const peaks: IPeakItem[] = [
   },
 ];
 
-const perfectPartList = [
-  "You have/or desire to have a purpose, a personal goal, and die to achieve it",
-  "You have a growth mindset, who keep learning & improving yourself everyday",
-  "You are always ready to get rid of old habits and thoughts, open to new ideas & suggestions",
-  "You have excellent teamwork spirit. You work well to different types of people, and embrace the power of collaboration",
-  "You take responsibilities for what you do. You never surrender to the obstacles, but find ways to overcome it by all means",
-  "You respect the team and the company’s objectives. You are willing to make long-term contribution to the business.",
-];
-
 export default async function Career() {
   const careerPage = await fetchContent({
     url: "/career-pages?populate=*",
+  });
+
+  const careerRequirements = await fetchContent({
+    url: "/career-requirements?populate=*",
+  });
+
+  const careerPeople = await fetchContent({
+    url: "/career-peoples?populate=*",
+  });
+
+  const hrJobs = await fetchContent({
+    url: "/hr-categories?populate=*",
   });
   return (
     <div className="relative bg-[#131313] overflow-hidden">
@@ -259,9 +262,7 @@ export default async function Career() {
                 Reach the top of the world with
                 <span className="text-main-0">iKame!</span>
               </p> */}
-             {ReactHtmlParser(
-                  careerPage.data[0].attributes.BlockTitle1
-                )}
+              {ReactHtmlParser(careerPage.data[0].attributes.BlockTitle1)}
               <div>
                 <Button>Apply</Button>
               </div>
@@ -271,9 +272,7 @@ export default async function Career() {
       </section>
       <section className="py-[120px] container mx-auto">
         <div className="flex justify-center text-[48px] font-bold">
-        {ReactHtmlParser(
-                  careerPage.data[0].attributes.BlockTitle2
-                )}
+          {ReactHtmlParser(careerPage.data[0].attributes.BlockTitle2)}
         </div>
         <div className="grid grid-cols-3 gap-14 mt-20">
           {peaks.map((peak) => (
@@ -293,13 +292,15 @@ export default async function Career() {
           <div className="col-span-1"></div>
           <div className="col-span-2 bg-black-1 py-[140px] pl-[120px] pr-[308px]">
             <div className="text-[48px] font-bold">
-            {ReactHtmlParser(
-                  careerPage.data[0].attributes.BlockTitle3
-                )}
+              {ReactHtmlParser(careerPage.data[0].attributes.BlockTitle3)}
             </div>
             <div className="flex flex-col gap-10">
-              {perfectPartList.map((item: string) => {
-                return <PerfectPartItem key={item}>{item}</PerfectPartItem>;
+              {careerRequirements.data.map((item: any) => {
+                return (
+                  <PerfectPartItem key={item.attributes.Title}>
+                    {ReactHtmlParser(item.attributes.Title)}
+                  </PerfectPartItem>
+                );
               })}
             </div>
           </div>
@@ -308,11 +309,11 @@ export default async function Career() {
 
       {/* LEADER QUOTE  */}
       <section className="py-[120px]">
-        <LeaderQuote />
+        <LeaderQuote careerPeople={careerPeople} />
       </section>
 
       {/* JOBS  */}
-      <JobSection careerPage={careerPage} tabs={tabs} />
+      <JobSection hrJobs={hrJobs} careerPage={careerPage} tabs={tabs} />
     </div>
   );
 }

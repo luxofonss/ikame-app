@@ -5,69 +5,7 @@ import OutStandingProductSection from "@/components/OutstandingProductSection";
 import ProductItem from "@/components/ProductItem";
 import fetchContent from "@/lib/fetch";
 import { BASE_IMAGE_URL } from "@/configs";
-
-const products = [
-  {
-    title: "Word Office - PDF, Docx, XLSX",
-    path: "/word-office.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Cast for Chromecast & TV Cast",
-    path: "/cast-chrome.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Saver For WA Status",
-    path: "/saver.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Remote Control for RokuTV",
-    path: "/rokutv.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "AppLock - Locker, Fingerprint",
-    path: "/secure.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Document Office: Read & Sign",
-    path: "/docs-office.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Equalizer - Volume Booster",
-    path: "/volume-equalizer.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Prank Sounds - Fart & Haircut",
-    path: "/prank-sound.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Step Counter: Daily Steps",
-    path: "/step-counter.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Yoga Poses: Yoga For Beginners",
-    path: "/yoga-poses.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "ChatAI: AI Chatbot App",
-    path: "/chat-ai.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-  {
-    title: "Document Scanner - PDF Scanner",
-    path: "/doc-scanner.png",
-    link: "https://play.google.com/store/apps/details?id=com.begamob.word.office.pdf.docx.xlsx",
-  },
-];
+import TopGiantFooter from "@/components/TopGiantFooter";
 
 export default async function Products() {
   const productPage = await fetchContent({ url: "/product-pages?populate=*" });
@@ -126,6 +64,8 @@ export default async function Products() {
           })}
         </div>
       </section>
+      {/* TOP GIANT */}
+      <TopGiantFooter />
     </div>
   );
 }

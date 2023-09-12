@@ -32,7 +32,6 @@ const navList = [
 const HeaderNav: FC<Props> = ({}) => {
   const pathname = usePathname();
 
-  console.log("router:: ", pathname);
   return (
     <nav className="flex gap-11">
       {navList.map((nav) => {

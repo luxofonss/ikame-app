@@ -12,6 +12,8 @@ const config: Config = {
         poppins: ["Poppins"],
       },
       backgroundImage: {
+        "main-gradient":
+          "linear-gradient(92deg, #F56522 1.42%, #FDCC24 160.38%)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
@@ -20,7 +22,9 @@ const config: Config = {
         "header-transparent":
           "linear-gradient(180deg, #000 0%, rgba(3, 3, 3, 0.33) 97.88%, rgba(0, 0, 0, 0.00) 100%)",
         "home-bg": "url('/home-bg.png')",
+        "about-bg": "url('/about-bg.png')",
         "download-bg": "url('/download-bg.png')",
+        "perso-bg": "url('/perso-bg.png')",
         "orange-round": "url('/orange-round.png')",
         control: "url('/control.png')",
         apple: "url('/apple.png')",

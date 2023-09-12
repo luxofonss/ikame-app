@@ -4,20 +4,19 @@ import { FC, useState } from "react";
 import { cn } from "@/lib/utils";
 import ReactHtmlParser from "react-html-parser";
 import Badge from "./Badge";
+import Link from "next/link";
 
 type IJobSectionProps = {
   tabs: any;
   careerPage: any;
+  hrJobs: any;
 };
-const JobSection: FC<IJobSectionProps> = ({ tabs, careerPage }) => {
+const JobSection: FC<IJobSectionProps> = ({ tabs, careerPage, hrJobs }) => {
   const [selected, setSelected] = useState(0);
   return (
     <section className="container mx-auto py-[84px]">
       <h3 className="text-center text-[48px]">
         {ReactHtmlParser(careerPage.data[0].attributes.BlockTitle4)}
-      </h3>
-      <h3 className="text-center text-[48px] font-bold">
-        Check out our available positions
       </h3>
 
       {/* TABS  */}
@@ -42,32 +41,39 @@ const JobSection: FC<IJobSectionProps> = ({ tabs, careerPage }) => {
           })}
         </ul>
         <div className="mt-[50px]">
-          {tabs.map((tab: any, index: number) => {
+          {hrJobs.data.map((tab: any, index: number) => {
             return (
               <div
                 className={cn(
                   "flex flex-col gap-7",
                   index === selected ? "flex" : "hidden"
                 )}
-                key={tab.title}
+                key={tab.attributes.Title}
               >
-                {tab.jobs.map((job: any) => {
+                {tab.attributes.hr_jobs.data.map((job: any) => {
                   return (
                     <div
                       className="py-8 px-10 rounded-[28px] bg-main-3"
-                      key={job.title}
+                      key={job.attributes.Title}
                     >
                       <div className="flex gap-5">
-                        <h4 className="text-2xl font-bold">{job.title}</h4>
-                        <Badge outline>{job.type}</Badge>
-                        {job.isHot ? <Badge>Hot</Badge> : null}
+                        <Link href={"/career/" + job.id}>
+                          <h4 className="text-2xl font-bold">
+                            {job.attributes.Title}
+                          </h4>
+                        </Link>
+                        {job.attributes.Tag.split(",").map((tag: string) => {
+                          return (
+                            <Badge key={tag} outline={tag !== "Hot"}>
+                              {tag}
+                            </Badge>
+                          );
+                        })}
                       </div>
                       <div className="flex gap-5 text-xl">
-                        <div>
-                          {job.salary.type}: {job.salary.value}
-                        </div>
+                        <div>upto: ${job.attributes.salary}</div>
                         <div>|</div>
-                        <div>{job.date}</div>
+                        <div>{job.attributes.Expired}</div>
                       </div>
                     </div>
                   );

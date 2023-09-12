@@ -2,6 +2,7 @@ import { BASE_API_URL } from "@/configs";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import TopGiantFooter from "./TopGiantFooter";
 
 type Props = {};
 interface INavigateList {
@@ -20,21 +21,6 @@ const Footer: FC<Props> = async ({}) => {
 
   return (
     <footer>
-      <div className="w-full h-[300px] bg-footer-bg bg-no-repeat bg-cover">
-        <div className="container mx-auto">
-          <div className="italic text-4xl font-semibold text-center pt-[84px]">
-            To become the next Top Giant
-          </div>
-          <div className="flex justify-center mt-4">
-            <Link
-              className="bg-white text-main-0 font-bold px-[50px] mt-[17px] rounded-[14px] py-[16px]"
-              href={"/publish"}
-            >
-              Publish your App
-            </Link>
-          </div>
-        </div>
-      </div>
       <div className="container mx-auto py-40">
         <div className="flex justify-between">
           <div className="flex flex-col">

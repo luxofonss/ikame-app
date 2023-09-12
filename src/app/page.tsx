@@ -11,6 +11,7 @@ import BottomUpAnimation from "@/components/animations/BottomUpAnimation";
 import TopDownAnimation from "@/components/animations/TopDownAnimation";
 import fetchContent from "@/lib/fetch";
 import HightLight from "@/components/HightLight";
+import TopGiantFooter from "@/components/TopGiantFooter";
 
 export default async function Home() {
   const homepages = await fetchContent({
@@ -134,6 +135,10 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* TOP GIANT */}
+      <TopGiantFooter />
+
       {/* CAROUSEL  */}
       <FooterCarousel data={homePartner} />
     </div>
