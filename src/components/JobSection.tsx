@@ -1,18 +1,20 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { FC, useState } from "react";
+import { cn } from "@/lib/utils";
+import ReactHtmlParser from "react-html-parser";
 import Badge from "./Badge";
 
 type IJobSectionProps = {
   tabs: any;
+  careerPage: any;
 };
-const JobSection: FC<IJobSectionProps> = ({ tabs }) => {
+const JobSection: FC<IJobSectionProps> = ({ tabs, careerPage }) => {
   const [selected, setSelected] = useState(0);
   return (
     <section className="container mx-auto py-[84px]">
       <h3 className="text-center text-[48px]">
-        Ready to build Giant App Together?{" "}
+        {ReactHtmlParser(careerPage.data[0].attributes.BlockTitle4)}
       </h3>
       <h3 className="text-center text-[48px] font-bold">
         Check out our available positions

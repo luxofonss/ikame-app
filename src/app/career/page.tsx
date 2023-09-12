@@ -1,11 +1,13 @@
 import { HTMLAttributes } from "react";
 
 import Image from "next/image";
+import ReactHtmlParser from "react-html-parser";
 
 import BlurRound from "@/components/BlurRournd";
 import Button from "@/components/Button";
 import LeaderQuote from "@/components/LeaderQoute";
 import JobSection from "@/components/JobSection";
+import fetchContent from "@/lib/fetch";
 
 const tabs = [
   {
@@ -236,7 +238,10 @@ const perfectPartList = [
   "You respect the team and the company’s objectives. You are willing to make long-term contribution to the business.",
 ];
 
-export default function Career() {
+export default async function Career() {
+  const careerPage = await fetchContent({
+    url: "/career-pages?populate=*",
+  });
   return (
     <div className="relative bg-[#131313] overflow-hidden">
       <BlurRound className=" w-[361px] h-[361px] absolute top-[161px] left-[433px]" />
@@ -246,14 +251,17 @@ export default function Career() {
       <section className=" w-full bg-no-repeat bg-cover bg-center h-[900px] bg-career-bg overflow-hidden">
         <div className="container mx-auto">
           <div className="grid grid-cols-2">
-            <div className="pt-[281px] flex flex-col gap-4">
-              <h1 className="font-bold text-[60px] text-main-0">
+            <div className="pt-[281px] text-[60px] flex flex-col gap-4">
+              {/* <h1 className="font-bold text-[60px] text-main-0">
                 Career Opportunity
               </h1>
               <p className="font-medium text-[48px]">
                 Reach the top of the world with
                 <span className="text-main-0">iKame!</span>
-              </p>
+              </p> */}
+             {ReactHtmlParser(
+                  careerPage.data[0].attributes.BlockTitle1
+                )}
               <div>
                 <Button>Apply</Button>
               </div>
@@ -263,7 +271,9 @@ export default function Career() {
       </section>
       <section className="py-[120px] container mx-auto">
         <div className="flex justify-center text-[48px] font-bold">
-          Our Peaks Create a Difference
+        {ReactHtmlParser(
+                  careerPage.data[0].attributes.BlockTitle2
+                )}
         </div>
         <div className="grid grid-cols-3 gap-14 mt-20">
           {peaks.map((peak) => (
@@ -283,8 +293,9 @@ export default function Career() {
           <div className="col-span-1"></div>
           <div className="col-span-2 bg-black-1 py-[140px] pl-[120px] pr-[308px]">
             <div className="text-[48px] font-bold">
-              Are you a perfect part of the{" "}
-              <span className="text-main-0">iKame Applications?</span>
+            {ReactHtmlParser(
+                  careerPage.data[0].attributes.BlockTitle3
+                )}
             </div>
             <div className="flex flex-col gap-10">
               {perfectPartList.map((item: string) => {
@@ -301,7 +312,7 @@ export default function Career() {
       </section>
 
       {/* JOBS  */}
-      <JobSection tabs={tabs} />
+      <JobSection careerPage={careerPage} tabs={tabs} />
     </div>
   );
 }

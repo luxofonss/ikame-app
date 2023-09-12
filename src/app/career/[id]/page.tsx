@@ -1,7 +1,9 @@
+import { FC } from "react";
+
+import Link from "next/link";
+
 import Input from "@/components/Input";
 import Image from "next/image";
-import Link from "next/link";
-import { FC } from "react";
 
 type Props = {};
 const JobDetail: FC<Props> = ({}) => {

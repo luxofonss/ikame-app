@@ -12,7 +12,7 @@ interface IProductItemProps {
 
 const ProductItem: FC<IProductItemProps> = ({ path, title, link }) => {
   return (
-    <div className="py-10 h-[430px] px-[66px] rounded-[32px] border-[1px] border-[rgba(255, 255, 255, 0.20)]">
+    <div className="py-10 h-[430px] px-[66px] rounded-[32px] border-[1px] border-[rgba(255, 255, 255, 0.20)] hover:shadow-lg hover:scale-[1.02] transition">
       <div className="flex h-full flex-col justify-between items-center">
         <Image src={path} width={200} height={200} alt="title" />
         <div className="font-bold text-[20px] text-center">{title}</div>

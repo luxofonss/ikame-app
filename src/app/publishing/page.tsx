@@ -1,14 +1,18 @@
+import { FC } from "react";
+import Image from "next/image";
+import ReactHtmlParser from "react-html-parser";
+
 import AchievementRound from "@/components/AchievementRound";
 import BlurRound from "@/components/BlurRournd";
 import Button from "@/components/Button";
 import OutStandingProductSection from "@/components/OutstandingProductSection";
 import ProductItem from "@/components/ProductItem";
+import fetchContent from "@/lib/fetch";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { FC } from "react";
+import { BASE_IMAGE_URL } from "@/configs";
+import HightLight from "@/components/HightLight";
 
 interface IWorkItem {
-  color: string;
   svg: string;
   title: string;
   desc: string;
@@ -53,7 +57,18 @@ const workItems = [
   },
 ];
 
-export default function Publishing() {
+export default async function Publishing() {
+  const publishingPage = await fetchContent({
+    url: "/publishing-pages?populate=*",
+  });
+
+  const benefits = await fetchContent({
+    url: "/publishing-benefits?populate=*",
+  });
+
+  const publishingWork = await fetchContent({
+    url: "/publising-works?populate=*",
+  });
   return (
     <div className="bg-[#131313]">
       {/* QOUTE */}
@@ -65,10 +80,12 @@ export default function Publishing() {
           <div className="grid grid-cols-2">
             <div className="pt-[281px] flex flex-col gap-4">
               <h1 className="font-bold text-[60px] ">
-                <span className="text-main-0">Publish</span> with us
+                {ReactHtmlParser(publishingPage.data[0].attributes.BlockTitle1)}
               </h1>
               <p className="font-bold text-[24px]">
-                Your App Journey Starts Here
+                {ReactHtmlParser(
+                  publishingPage.data[0].attributes.BlockDescription1
+                )}
               </p>
               <div>
                 <Button>Join us as Partners</Button>
@@ -77,105 +94,71 @@ export default function Publishing() {
           </div>
         </div>
       </section>
-      {/* ACHIEVEMENT */}
-      <section className="w-full bg-no-repeat bg-contain bg-bottom h-[798px] bg-download-bg">
-        <div className="container h-full mx-auto flex justify-between items-center">
-          <AchievementRound
-            src="/download-icon.svg"
-            alt="download"
-            number="Top 1"
-            desc="Download in ASEA"
-          />
-          <AchievementRound
-            src="/user-icon.svg"
-            alt="user"
-            number="5M+"
-            desc="Daily  Active Users"
-          />
-          <AchievementRound
-            src="/users-icon.svg"
-            alt="users"
-            number="1.8 B+"
-            desc="Total Download"
-          />
-          <AchievementRound
-            src="/product-icon.svg"
-            alt="products"
-            number="100+"
-            desc="Successful Products"
-          />
-        </div>
-      </section>
+      {/* HIGHT LIGHT */}
+      <HightLight />
+
       {/* PROS  */}
       <section className="container mx-auto py-[120px]">
         <div className="flex flex-col gap-[50px]">
-          <div className="grid grid-cols-2">
-            <div className="w-full flex flex-col justify-between items-center h-[342px] bg-main-0 pt-[26px] px-[35px] pb-[30px] rounded-l-[28px]">
-              <Image src="/user-tag.svg" alt="user" width={100} height={100} />
-              <div className="text-[30px] font-bold ">Professional team</div>
-              <p className="text-2xl text-center">
-                UA expertise, Market researcher, Monetizer, Idea Creative,
-                Product operator are passionate about joining projects.
-              </p>
-            </div>
-            <div className="bg-pub-1 w-full h-[342px] rounded-r-[28px]"></div>
-          </div>
-          <div className="grid grid-cols-2">
-            <div className="bg-pub-2 w-full h-[342px] rounded-r-[28px]"></div>
-            <div className="w-full flex flex-col justify-between items-center h-[342px] bg-[#05303B] pt-[26px] px-[35px] pb-[30px] rounded-l-[28px]">
-              <Image src="/flag.svg" alt="flag" width={100} height={100} />
-              <div className="text-[30px] font-bold ">Best in class</div>
-              <p className="text-2xl text-center">
-                You receive key factors and market insights to make a successful
-                product global from us.
-              </p>
-            </div>
-          </div>
-          <div className="grid grid-cols-2">
-            <div className="w-full flex flex-col justify-between items-center h-[342px] bg-[#05303B] pt-[26px] px-[35px] pb-[30px] rounded-l-[28px]">
-              <Image
-                src="/question.svg"
-                alt="question"
-                width={100}
-                height={100}
-              />
-              <div className="text-[30px] font-bold "> Ultimate support</div>
-              <p className="text-2xl text-center">
-                Do not worry if any difficulties arise, we are always by your
-                side.
-              </p>
-            </div>
-            <div className="bg-pub-3 w-full h-[342px] rounded-r-[28px]"></div>
-          </div>
-          <div className="grid grid-cols-2">
-            <div className="bg-pub-4 w-full h-[342px] rounded-r-[28px]"></div>
-            <div className="w-full flex flex-col justify-between items-center h-[342px] bg-[#05303B] pt-[26px] px-[35px] pb-[30px] rounded-l-[28px]">
-              <Image
-                src="/commitment.svg"
-                alt="commitment"
-                width={100}
-                height={100}
-              />
-              <div className="text-[30px] font-bold ">
-                Commitment & Transparency
-              </div>
-              <p className="text-2xl text-center">
-                Access the Top-tier BI and data analysis systems that meet
-                international standards
-              </p>
-            </div>
-          </div>
-          <div className="grid grid-cols-2">
-            <div className="w-full flex flex-col justify-between items-center h-[342px] bg-[#05303B] pt-[26px] px-[35px] pb-[30px] rounded-l-[28px]">
-              <Image src="/money.svg" alt="money" width={100} height={100} />
-              <div className="text-[30px] font-bold "> Financial Coverage</div>
-              <p className="text-2xl text-center">
-                We take care of all marketing expenses throughout the
-                application&apos;s growth phase.
-              </p>
-            </div>
-            <div className="bg-pub-5 w-full h-[342px] rounded-r-[28px]"></div>
-          </div>
+          {benefits.data.map((item: any, index: number) => {
+            if (index % 2 === 0)
+              return (
+                <div className="grid grid-cols-2">
+                  <div className="w-full flex flex-col justify-between items-center h-[342px] bg-main-0 pt-[26px] px-[35px] pb-[30px] rounded-l-[28px]">
+                    <Image
+                      src="/user-tag.svg"
+                      alt="user"
+                      width={100}
+                      height={100}
+                    />
+                    <div className="text-[30px] font-bold ">
+                      {ReactHtmlParser(item.attributes.Title)}
+                    </div>
+                    <p className="text-2xl text-center">
+                      {ReactHtmlParser(item.attributes.Description)}
+                    </p>
+                  </div>
+                  <div
+                    style={{
+                      backgroundImage: `url('${
+                        BASE_IMAGE_URL +
+                        item.attributes.Media.data.attributes.url
+                      }')`,
+                    }}
+                    className="w-full h-[342px] rounded-r-[28px]"
+                  ></div>
+                </div>
+              );
+            else
+              return (
+                <div className="grid grid-cols-2">
+                  <div
+                    style={{
+                      backgroundImage: `url('${
+                        BASE_IMAGE_URL +
+                        item.attributes.Media.data.attributes.url
+                      }')`,
+                    }}
+                    className="w-full h-[342px] rounded-r-[28px]"
+                  ></div>
+                  <div className="w-full flex flex-col justify-between items-center h-[342px] bg-[#05303B] pt-[26px] px-[35px] pb-[30px] rounded-l-[28px]">
+                    <Image
+                      src="/flag.svg"
+                      alt="flag"
+                      width={100}
+                      height={100}
+                    />
+                    <div className="text-[30px] font-bold ">
+                      {" "}
+                      {ReactHtmlParser(item.attributes.Title)}
+                    </div>
+                    <p className="text-2xl text-center">
+                      {ReactHtmlParser(item.attributes.Description)}
+                    </p>
+                  </div>
+                </div>
+              );
+          })}
         </div>
       </section>
 
@@ -185,8 +168,15 @@ export default function Publishing() {
           How do we work together?
         </div>
         <div className="grid grid-cols-3 gap-[66px]">
-          {workItems.map((item) => {
-            return <WorkItem key={item.title} {...item} />;
+          {publishingWork.data.map((item: any) => {
+            return (
+              <WorkItem
+                key={item.attributes.Title}
+                svg={BASE_IMAGE_URL + item.attributes.Media.data.attributes.url}
+                title={item.attributes.Title}
+                desc={item.attributes.Description}
+              />
+            );
           })}
         </div>
       </section>
@@ -197,16 +187,15 @@ export default function Publishing() {
   );
 }
 
-const WorkItem: FC<IWorkItem> = ({ svg, title, color, desc }) => {
+const WorkItem: FC<IWorkItem> = ({ svg, title, desc }) => {
   return (
     <div className="flex flex-col items-center justify-center">
       <div
         className={cn(
-          "w-[101px] h-[101px] rounded-full flex items-center justify-center",
-          color
+          "w-[101px] h-[101px] rounded-full flex items-center justify-center"
         )}
       >
-        <Image src={svg} alt="title" width={50} height={50} />
+        <Image src={svg} alt="title" width={100} height={100} />
       </div>
       <div className="mt-8 p-10 h-[288px] bg-[#1F1F1F] rounded-[40px] flex flex-col items-between">
         <h3 className="font-bold text-4xl text-center">{title}</h3>

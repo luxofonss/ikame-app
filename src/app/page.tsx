@@ -1,55 +1,30 @@
 import ReactHtmlParser from "react-html-parser";
 
-import { BASE_API_URL, BASE_IMAGE_URL } from "@/configs";
+import { BASE_IMAGE_URL } from "@/configs";
 
 import AchievementRound from "@/components/AchievementRound";
 import BestProductItem from "@/components/BestProductItem";
 import BlurRound from "@/components/BlurRournd";
 import FooterCarousel from "@/components/FooterCarousel";
 import IntroduceItem from "@/components/IntroduceItem";
-import { cn } from "@/lib/utils";
-
-async function getHomepage() {
-  const response = await fetch(BASE_API_URL + "/home-pages?populate=*", {
-    cache: "default",
-  });
-  return await response.json();
-}
-
-async function getHomeContent() {
-  const response = await fetch(BASE_API_URL + "/home-contents?populate=*", {
-    cache: "default",
-  });
-  return await response.json();
-}
-
-async function getHomeTopProduct() {
-  const response = await fetch(BASE_API_URL + "/home-top-products?populate=*", {
-    cache: "default",
-  });
-  return await response.json();
-}
-
-async function getHomePartner() {
-  const response = await fetch(BASE_API_URL + "/home-partners?populate=*", {
-    cache: "default",
-  });
-  return await response.json();
-}
-
-async function getHightLight() {
-  const response = await fetch(BASE_API_URL + "/highlights?populate=*", {
-    cache: "default",
-  });
-  return await response.json();
-}
+import BottomUpAnimation from "@/components/animations/BottomUpAnimation";
+import TopDownAnimation from "@/components/animations/TopDownAnimation";
+import fetchContent from "@/lib/fetch";
+import HightLight from "@/components/HightLight";
 
 export default async function Home() {
-  const homepages = await getHomepage();
-  const homeContent = await getHomeContent();
-  const homeTopProduct = await getHomeTopProduct();
-  const homePartner = await getHomePartner();
-  const hightLight = await getHightLight();
+  const homepages = await fetchContent({
+    url: "/home-pages?populate=*",
+  });
+  const homeContent = await fetchContent({
+    url: "/home-contents?populate=*",
+  });
+  const homeTopProduct = await fetchContent({
+    url: "/home-top-products?populate=*",
+  });
+  const homePartner = await fetchContent({
+    url: "/home-partners?populate=*",
+  });
 
   return (
     <div>
@@ -71,15 +46,14 @@ export default async function Home() {
         <div className="container mx-auto">
           <div className="grid grid-cols-2">
             <div className="pt-[281px]">
-              <div className="font-bold text-[60px]">
+              <TopDownAnimation className="font-bold text-[60px]">
                 {ReactHtmlParser(homepages.data[0].attributes.BlockTitle1)}
-              </div>
-
-              <div className="text-2xl leading-10">
+              </TopDownAnimation>
+              <BottomUpAnimation className="text-2xl leading-10">
                 {ReactHtmlParser(
                   homepages.data[0].attributes.DescriptionBlock1
                 )}
-              </div>
+              </BottomUpAnimation>
             </div>
           </div>
         </div>
@@ -95,24 +69,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      {/* ACHIEVEMENT */}
-      <section className="w-full bg-no-repeat bg-contain bg-bottom h-[798px] bg-download-bg">
-        <div className="container h-full mx-auto flex justify-between items-center">
-          {hightLight.data.map((item: any, index: number) => {
-            return (
-              <AchievementRound
-                key={item.attributes.Title}
-                src={
-                  BASE_IMAGE_URL + item.attributes.Media.data[0].attributes.url
-                }
-                alt={item.attributes.Title}
-                number={item.attributes.Title}
-                desc={item.attributes.Description}
-              />
-            );
-          })}
-        </div>
-      </section>
+      {/* HIGHT LIGHT */}
+      <HightLight />
       {/* BEST PRODUCTS */}
       <section className="container mx-auto mt-[120px]">
         <div className="flex justify-between">
@@ -152,7 +110,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
       {/* CAREER */}
       <section className="relative w-full h-[800px] bg-no-repeat bg-cover bg-center bg-career mt-[120px]">
         <div className="container mx-auto ">
@@ -177,7 +134,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
       {/* CAROUSEL  */}
       <FooterCarousel data={homePartner} />
     </div>
